@@ -28,4 +28,4 @@ Raspberry Piを用いた電子工作で遊んだ内容をつらつらと書い�
 
 ## 3. 本編
 1. [機器のセットアップ](setup/setup.md)
-2. [GPIOコマンドについて](gpio_command/gpio.md)
+2. [GPIOコマンドについて(WiringPi/pigpio)](gpio_command/gpio.md)
