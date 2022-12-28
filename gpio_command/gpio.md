@@ -54,7 +54,7 @@ sudo killall pigpiod
 - ハードウェアのリビジョン番号が16以上であること。
 - ユーザーGPIOは2-27までである。(0と1は予約済み)
 
-<img src = "./img/gpio_num.png" width = "500">
+<img src = "./fig/gpio_num.png" width = "500">
 
 # 5. pigpio (C interface)の一部関数の紹介
 [公式ページ](http://abyz.me.uk/rpi/pigpio/cif.html#gpioInitialise)を参考にしながら最低限必要そうなものをまとめた。必要に応じて随時付け足していく。
