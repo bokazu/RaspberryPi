@@ -24,4 +24,6 @@ Raspberry Piを用いた電子工作で遊んだ内容を書いていきます�
 
 ## 3. 本編
 1. [機器のセットアップ](setup/setup.md)
+    - ファンやケースの組み立て
+    - 公開鍵認証方式ssh接続の設定
 2. [GPIOコマンドについて(WiringPi/pigpio)](gpio_command/gpio.md)
