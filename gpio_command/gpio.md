@@ -1,9 +1,43 @@
-# 1. WirignPiの代わりにpigpioを利用する
+# 1. WiringPiを利用する場合
+RaspberryPi用のGPIOインタフェースライブラリで、ライセンスはGNU LGPLv3のフリーソフトウェアです。デジタル入出力、シリアル通信、I2C、PWM、時間待ちなどの関数があります。
+
+まずは、以下のコマンドでWiringPiがインストールされているかを確認します。
+```
+user@raspberrypi : ~$ gpio -v
+```
+これでversion情報が返ってくればOKですがそうでない場合は以下のようにしてinstallします。
+```
+user@raspberrypi : ~$ sudo apt-get update
+user@raspberrypi : ~$ git clone https://github.com/WiringPi/WiringPi 
+```
+クローンが終了したら
+```
+user@raspberrypi : ~$ cd WiringPi
+user@raspberrypi : ~$ ./build
+```
+として
+```
+All Done.
+
+NOTE: To compile programs with wiringPi, you need to add:
+    -lwiringPi
+  to your compile line(s) To use the Gertboard, MaxDetect, etc.
+  code (the devLib), you need to also add:
+    -lwiringPiDev
+  to your compile line(s).
+
+```
+というメッセージが表示されれば完了です。
+
+
+<br>
+
+# 2. pigpioを利用する場合
 今回遊ぶ上で参考にしたテキストではGPIOを操作するコマンドとして`WiringPi`というライブラリのものを使用しています。しかし、これは2019年に開発元が開発停止を表明していたようで今後は非推奨のようです(参考にしたページに貼ってあるURLにとんでもページは見つかりませんが)。
-そこで今回はいくつかるGPIO操作ライブラリのうち`pigpio`というものを使用することにしました。[公式ページ](https://abyz.me.uk/rpi/pigpio/)にはライブラリの説明が次のように書いてあります。
+そこで今回はいくつかるGPIO操作ライブラリのうち`pigpio`についてもかんたんにまとめておきました。[公式ページ](https://abyz.me.uk/rpi/pigpio/)にはライブラリの説明が次のように書いてあります。
 >pigpioはラズベリーパイで使用可能なライブラリでGPIOのコントロールを行うことができます。ラズパイの全versionで動作します。
 
-# 2. pigpioのインストール
+# 3. pigpioのインストール
 このライブラリを使用するとシェルからGPIOを叩いたりPythonやCからGPIOを操作できるようです。
 
 aptコマンドでインストールできます。
@@ -15,7 +49,7 @@ sudo apt install pigio
 sudo pigpiod
 ```
 
-# 3. 使い方
+# 4. 使い方
 pigpio.hライブラリを忘れずにincludeし、はじめに`gpioInitialise()`で初期化を行い、最後に`gpioTerminate()`で終了する。この2つの関数の間で様々な処理を行う。
 ```C
 #include <pigpio.h>
@@ -48,7 +82,7 @@ sudo killall pigpiod
 ```
 でデーモンを終了してからファイルを実行する必要がある。
 
-# 4. PIN番号とGPIO番号の対応(4Bの場合)
+# 5. PIN番号とGPIO番号の対応(4Bの場合)
 ラズパイのGPIO番号はどのモデルを使用しているかによって微妙に異なるようである。pigpioの公式ページでは4BはType 3にカテゴライズされているようで、対応は以下のようになっているようである。
 - ピンは全部で40ある
 - ハードウェアのリビジョン番号が16以上であること。
@@ -56,7 +90,7 @@ sudo killall pigpiod
 
 <img src = "./fig/gpio_num.png" width = "500">
 
-# 5. pigpio (C interface)の一部関数の紹介
+# 6. pigpio (C interface)の一部関数の紹介
 [公式ページ](http://abyz.me.uk/rpi/pigpio/cif.html#gpioInitialise)を参考にしながら最低限必要そうなものをまとめた。必要に応じて随時付け足していく。
 1. SetUp関連
 
